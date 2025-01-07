@@ -3,12 +3,9 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myproweb/router/auto_router.gr.dart';
-import 'package:myproweb/state/auth/auth_bloc.dart';
-import 'package:myproweb/ui/main/app_bar.dart';
 import 'package:myproweb/ui/main/body.dart';
 import 'package:myproweb/ui/main/nav_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class AppScreen extends StatelessWidget {
