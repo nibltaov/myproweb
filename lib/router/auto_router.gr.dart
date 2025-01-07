@@ -10,15 +10,24 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i11;
 import 'package:myproweb/app.dart' as _i1;
-import 'package:myproweb/pages/home/coworking_screen.dart' as _i2;
-import 'package:myproweb/pages/home/feedback_screen.dart' as _i3;
-import 'package:myproweb/pages/home/home_screen.dart' as _i6;
-import 'package:myproweb/pages/home/HomeScreen/home_balance_screen.dart' as _i4;
-import 'package:myproweb/pages/home/HomeScreen/home_main_screen.dart' as _i5;
-import 'package:myproweb/pages/home/messenger_screen.dart' as _i7;
-import 'package:myproweb/pages/home/proweb_screen.dart' as _i8;
-import 'package:myproweb/pages/home/ranking_screen.dart' as _i9;
-import 'package:myproweb/pages/home/shop_screen.dart' as _i10;
+import 'package:myproweb/features/home_features/presentation/coworking_screen/coworking_screen.dart'
+    as _i2;
+import 'package:myproweb/features/home_features/presentation/feedback_screen/feedback_screen.dart'
+    as _i3;
+import 'package:myproweb/features/home_features/presentation/home_screen/home_screen.dart'
+    as _i6;
+import 'package:myproweb/features/home_features/presentation/home_screen/tabs/home_balance_screen.dart'
+    as _i4;
+import 'package:myproweb/features/home_features/presentation/home_screen/tabs/home_main_screen.dart'
+    as _i5;
+import 'package:myproweb/features/home_features/presentation/messenger_screen/messenger_screen.dart'
+    as _i7;
+import 'package:myproweb/features/home_features/presentation/proweb_screen/proweb_screen.dart'
+    as _i8;
+import 'package:myproweb/features/home_features/presentation/ranking_screen/ranking_screen.dart'
+    as _i9;
+import 'package:myproweb/features/home_features/presentation/shop_screen/shop_screen.dart'
+    as _i10;
 
 /// generated route for
 /// [_i1.AppScreen]
