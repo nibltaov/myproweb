@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get_it/get_it.dart';
-import 'package:myproweb/di.dart';
 import 'package:myproweb/router/auto_router.gr.dart';
+import 'package:myproweb/state/auth/auth_bloc.dart';
+import 'package:myproweb/ui/main/app_bar.dart';
 import 'package:myproweb/ui/main/body.dart';
 import 'package:myproweb/ui/main/nav_bar.dart';
-import 'package:myproweb/util/abstract_fetch.dart';
-import 'package:myproweb/util/fetch.dart';
-import 'package:myproweb/util/token_manage.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class AppScreen extends StatelessWidget {
@@ -41,8 +40,6 @@ class AppScreen extends StatelessWidget {
   }
 }
 
-class User {}
-
 class BodyPopScope extends StatelessWidget {
   final Widget child;
   const BodyPopScope({super.key, required this.child});
@@ -51,41 +48,35 @@ class BodyPopScope extends StatelessWidget {
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
     final provider = Provider.of<ScrollStateProvider>(context);
-    sl
-        .get<MainFetch>()
-        .get<User>(path: '/api/v1/launches/external/course/open_lesson')
-        .then((data) {
-          data.fold(
-            (errorRequest) {
-              print(errorRequest);
-            },
-            (user) {
-              print(user);
-            },
-          );
-        });
+
     tabsRouter.addListener(() {
       if (!provider.isNavigationBarVisible) {
         provider.showNavigationBar();
       }
     });
-    return PopScope(
-      canPop: tabsRouter.current.name == HomeRoute.name,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop) {
-          context.router.back();
-          if (tabsRouter.current.name == HomeRoute.name) {
-            Fluttertoast.showToast(msg: "Ещё раз для выхода");
+    return AnnotatedRegion(
+      value: FlexColorScheme.themedSystemNavigationBar(
+        context,
+        systemNavBarStyle: FlexSystemNavBarStyle.transparent,
+      ),
+      child: PopScope(
+        canPop: tabsRouter.current.name == HomeRoute.name,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) {
+            context.router.back();
+            if (tabsRouter.current.name == HomeRoute.name) {
+              Fluttertoast.showToast(msg: "Ещё раз для выхода");
+            }
+            if (!provider.isNavigationBarVisible) {
+              provider.showNavigationBar();
+            }
           }
-          if (!provider.isNavigationBarVisible) {
-            provider.showNavigationBar();
-          }
-        }
-      },
-      child: Scaffold(
-        body: BodyApp(child: child),
-        bottomNavigationBar: BottomNavBar(),
-        extendBody: true,
+        },
+        child: Scaffold(
+          body: BodyApp(child: child),
+          bottomNavigationBar: BottomNavBar(),
+          extendBody: true,
+        ),
       ),
     );
   }

@@ -18,6 +18,15 @@ class AppThemeData {
         actionsPadding: EdgeInsets.symmetric(horizontal: 10),
         elevation: 0,
       ),
+
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: color.primaryTextColor,
+        refreshBackgroundColor: color.containerColor,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: color.primaryTextColor,
+        extendedTextStyle: TextStyle(color: color.primaryBg),
+      ),
       tabBarTheme: TabBarThemeData(
         indicatorSize: TabBarIndicatorSize.label,
         indicatorColor: color.primaryTextColor,
@@ -60,6 +69,7 @@ class AppThemeData {
             fontSize: 14,
           ),
           overlayColor: color.primaryBg,
+          iconColor: color.primaryBg,
         ),
       ),
       textButtonTheme: TextButtonThemeData(

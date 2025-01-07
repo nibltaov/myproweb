@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class MainFetch {
   String get main;
-  Future<Either<ErrorRequest, T>> get<T>({
+  Future<Either<ErrorRequest, Map<String, dynamic>>> get({
     required String path,
     bool checkToken = true,
   });
@@ -12,7 +12,7 @@ abstract class MainFetch {
 
 abstract class AuthFetch {
   String get main;
-  Future<Either<ErrorRequest, T>> get<T>({
+  Future<Either<ErrorRequest, Map<String, dynamic>>> get({
     required String path,
     bool checkToken = true,
   });
@@ -22,7 +22,7 @@ abstract class AuthFetch {
 
 abstract class VideoFetch {
   String get main;
-  Future<Either<ErrorRequest, T>> get<T>({
+  Future<Either<ErrorRequest, Map<String, dynamic>>> get({
     required String path,
     bool checkToken = true,
   });
@@ -32,7 +32,7 @@ abstract class VideoFetch {
 
 abstract class ChatFetch {
   String get main;
-  Future<Either<ErrorRequest, T>> get<T>({
+  Future<Either<ErrorRequest, Map<String, dynamic>>> get({
     required String path,
     bool checkToken = true,
   });

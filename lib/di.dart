@@ -1,9 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:myproweb/util/abstract_fetch.dart';
 import 'package:myproweb/util/fetch.dart';
 import 'package:myproweb/util/token_manage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'di.config.dart';
 
@@ -16,8 +18,14 @@ Future<void> configureDependencies() async => sl.init();
 abstract class AppModule {
   const AppModule();
 
+  @preResolve
+  Future<SharedPreferences> prefs() => SharedPreferences.getInstance();
+
   @lazySingleton
   TokenParses get tokenManage => TokenParses();
+
+  @lazySingleton
+  Dio get dio => Dio();
 
   @LazySingleton(as: AuthFetch)
   Fetch get auth => Fetch(

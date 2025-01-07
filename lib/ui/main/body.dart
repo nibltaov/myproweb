@@ -23,6 +23,10 @@ class BodyApp extends StatelessWidget {
           } else if (notification.direction == ScrollDirection.reverse) {
             provider.hideNavigationBar();
           }
+          if (notification.metrics.pixels ==
+              notification.metrics.maxScrollExtent) {
+            provider.showNavigationBar();
+          }
         }
         return true;
       },

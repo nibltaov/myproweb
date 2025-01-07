@@ -6,12 +6,11 @@ class HomeBalanceTab extends StatelessWidget {
   const HomeBalanceTab({super.key});
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text('HomeBalanceTab')],
-      ),
+    return ListView.builder(
+      itemCount: 50,
+      itemBuilder: (context, index) {
+        return ListTile(leading: CircleAvatar(), title: Text('$index'));
+      },
     );
   }
 }

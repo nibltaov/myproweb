@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,27 +12,35 @@ import 'package:myproweb/ui/colors/LightUI.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  runApp(const MyApp());
+  await configureDependencies();
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  runApp(MyApp(savedThemeMode: savedThemeMode));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AdaptiveThemeMode? savedThemeMode;
+  const MyApp({super.key, this.savedThemeMode});
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
-    return MaterialApp.router(
-      theme: AppThemeData.start(context, lightColors),
-      darkTheme: AppThemeData.start(context, darkColors),
-      themeMode: ThemeMode.system,
-      color: darkColors.primaryBg,
-      scrollBehavior: AppScrollBehavior(),
-      debugShowCheckedModeBanner: false,
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
+    return AdaptiveTheme(
+      initial: savedThemeMode ?? AdaptiveThemeMode.system,
+      light: AppThemeData.start(context, lightColors),
+      dark: AppThemeData.start(context, darkColors),
+      builder: (light, dark) {
+        return MaterialApp.router(
+          theme: light,
+          darkTheme: dark,
+          color: darkColors.primaryBg,
+          scrollBehavior: AppScrollBehavior(),
+          debugShowCheckedModeBanner: false,
+          routerDelegate: _appRouter.delegate(),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+        );
+      },
     );
   }
 }
